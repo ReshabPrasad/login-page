@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>Registration page</title>
+</head>
+<body>
+    <header class="registration-header">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li class="a"></li>
+                    <li class="a"></li>
+                    <li class="a"></li>
+                    <li class="a"></li>
+                </ul>
+            </nav>
+        </div>
+
+        <main>
+            <section class ="user-container login-section--display">
+    <div class = "registration">
+        <div class = "grid-two--column">
+            <div class="form-text">
+            <h2>Welcome back!</h2>
+            <p>To keep connected with us please login with your personal info</p>
+            <button class="login-btn">Login here</button>
+            </div>
+
+
+            <div class="registration-form">
+                <h2>Create account</h2>
+                <div class ="social icons">
+                    <a href="#">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+                <a href="#">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="#">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                </div>
+
+                <p>use your emails for registration</p>
+
+                <form action = "#">
+                    <div class ="input-field">
+                        <label for="username">
+                            <input type="text" id="username" placeholder="Username">
+                        </label>
+                    </div>
+                 
+                    <div class ="input-field">
+                        <label for="Email">
+                            <input type="email" id="Email" placeholder="Email">
+                        </label>
+                    </div>
+
+                    <div class ="input-field">
+                            <input type="password" id="Password" placeholder="Password">
+                    </div>
+                    
+                    <div class ="input-field">
+                        <input type="submit" value="Register" id="signup">
+                </div> 
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+   <div class="login">
+    <div class = "grid-two--column">
+        <div class="form-text">
+        <p>Enter your details and start journey with us</p>
+        <button class="registration-btn">Register here</button>
+        </div>
+
+
+        <div class="login-form">
+            <h2>Sign In</h2>
+            <div class ="social icons">
+                <a href="#">
+                <i class="fa-brands fa-discord"></i>
+            </a>
+            <a href="#">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="#">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="#">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            </div>
+
+            <p>use your account</p>
+
+            <form action = "#">
+             
+                <div class ="input-field">
+                    <label for="Email1">
+                        <input type="email" id="Email1" placeholder="Email">
+                    </label>
+                </div>
+
+                <div class ="input-field">
+                        <input type="password" id="Password1" placeholder="Password">
+                </div>
+                
+                <div class ="input-field">
+                    <input type="submit" value="Login" id="signin">
+            </div> 
+            </form>
+        </div>
+    </div>
+   </div>
+</section>
+</main>
+</header>
+
+
+<script src="script.js"></script>  
+
+
+</body>
+
+<script type="module">
+    import{ initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, set , ref , update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+ 
+ 
+    const firebaseConfig = {
+      apiKey: "AIzaSyB6VpZlL0RSXElM5ryGYu2iYD53ciw3aEk",
+      authDomain: "login-page-a6113.firebaseapp.com",
+      databaseURL: "https://login-page-a6113-default-rtdb.firebaseio.com",
+      projectId: "login-page-a6113",
+      storageBucket: "login-page-a6113.appspot.com",
+      messagingSenderId: "455039054383",
+      appId: "1:455039054383:web:bd27fe70f5fd5cbe6d8cda",
+      measurementId: "G-HLRJRG6GB0"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const database= getDatabase(app);
+    const auth = getAuth();
+
+
+    console.log("Reshab");
+    
+    const signup = document.getElementById('signup');
+    signup.addEventListener('click',() => {
+ 
+        var email=
+        
+        
+        
+        
+        document.getElementById('Email').value;
+        var password=document.getElementById('Password').value;
+        var username=document.getElementById('username').value;
+
+        console.log("o4l0");
+ 
+ 
+        createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    const user = userCredential.user;
+
+    console.log("kjcrn");
+
+    set(ref(database, 'users/' + user.uid), { 
+        username: username,
+        email: Email
+    })
+    console.log("fmrlmlr");
+    alert('Successfully registered');
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage);
+  });
+ 
+    });
+
+
+
+
+    const signin= document.getElementById('signin');
+    signin.addEventListener('click',() => {
+        var email1=document.getElementById('Email1').value;
+        var password1=document.getElementById('Password1').value;
+        signInWithEmailAndPassword(auth, email1, password1)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    const dt =new Date();
+    update(ref(database, 'users/' + user.uid), { 
+        last_login: dt, 
+    })
+    alert('Successfully Signed in');
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage);
+  });
+
+    })
+
+      
+</script>
+ 
+ 
+
+
+
+</html>
